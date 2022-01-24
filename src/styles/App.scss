@@ -1,0 +1,14 @@
+.color-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	// flex-wrap: wrap;
+	height: 100%;
+}
+
+html,
+body,
+#app,
+#app > div {
+	height: 100%;
+}
