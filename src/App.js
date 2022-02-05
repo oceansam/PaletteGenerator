@@ -3,30 +3,43 @@ import ColorCell from "./components/ColorCell";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import Icon from "@mui/material/Icon";
-import { generateColorList, generateStartColor } from "./lib/generators";
+import {
+	generateColorList,
+	generateStartColor,
+	generateNewList,
+} from "./lib/generators";
 import { animated, useTransition } from "react-spring";
 
 function App() {
 	const [colorList, setColorList] = useState([]);
 	const [title, setTitle] = useState("");
 	useEffect(() => {
-		getNewColorList();
+		setColorList(generateColorList(colorList));
 	}, []);
 
 	// Color List Methods
 	function getNewColorList() {
-		setColorList(generateColorList());
+		setColorList(generateNewList(colorList));
 	}
 	function addColor() {
-		setColorList(colorList.concat(generateStartColor().hex));
+		setColorList(
+			colorList.concat({ color: generateStartColor().hex, isLocked: false })
+		);
 	}
 	function popColor() {
-		console.log("trigger");
-		const newList = colorList.filter((color, i) => i != colorList.length);
+		const newList = colorList.filter((_, i) => i !== colorList.length);
 		newList.pop();
 		setColorList(newList);
 	}
 
+	function lockColor(currentColor) {
+		let tempArray = [...colorList];
+		const lockIndex = tempArray.findIndex(
+			(circle) => circle.color === currentColor
+		);
+		tempArray[lockIndex].isLocked = !tempArray[lockIndex].isLocked;
+		setColorList(tempArray);
+	}
 	// Transition Header
 	const transitions = useTransition(title, {
 		from: {
@@ -84,10 +97,14 @@ function App() {
 				</Button>
 			</div>
 			<div className="color-container">
-				{colorList.length}
-				{colorList.map((color, i) => (
+				{colorList.map((circle, i) => (
 					<>
-						<ColorCell name={color} key={i} />
+						<ColorCell
+							name={circle.color}
+							isLocked={circle.isLocked}
+							lockCurrentColor={lockColor}
+							key={i}
+						/>
 					</>
 				))}
 			</div>
