@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PaletteGenerator/static/css/main.bf29f4e8.css",
+    "main.js": "/PaletteGenerator/static/js/main.72b4ae3a.js",
+    "index.html": "/PaletteGenerator/index.html",
+    "main.bf29f4e8.css.map": "/PaletteGenerator/static/css/main.bf29f4e8.css.map",
+    "main.72b4ae3a.js.map": "/PaletteGenerator/static/js/main.72b4ae3a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bf29f4e8.css",
+    "static/js/main.72b4ae3a.js"
+  ]
+}
