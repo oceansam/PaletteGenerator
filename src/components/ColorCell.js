@@ -1,18 +1,27 @@
+// Styles
 import "../styles/ColorCell.scss";
-
+// Library
 import { useState } from "react";
 import Icon from "@mui/material/Icon";
-// Components
+// Component(s)
 import OptionMenu from "./OptionMenu";
 
-function ColorCell({ name, lockCurrentColor, isLocked }) {
+function ColorCell({
+	name,
+	lockCurrentColor,
+	removeCurrentColor,
+	isLocked,
+	copyCurrentColor,
+}) {
 	const [isVisible, setOptionsVisibility] = useState(false);
-	function handleCopy() {
-		navigator.clipboard.writeText(name);
+	function copyColor() {
+		copyCurrentColor(name);
 	}
-
 	function lockColor() {
 		lockCurrentColor(name);
+	}
+	function removeColor() {
+		removeCurrentColor(name);
 	}
 	return (
 		<>
@@ -31,6 +40,7 @@ function ColorCell({ name, lockCurrentColor, isLocked }) {
 					<OptionMenu
 						showMenu={isVisible}
 						updateColorLock={lockColor}
+						updateColorClose={removeColor}
 						isLocked={isLocked}
 					/>
 					<svg viewBox="0 0 25 20">
@@ -42,7 +52,7 @@ function ColorCell({ name, lockCurrentColor, isLocked }) {
 							fill={`${name}`}
 							stroke="black"
 							strokeWidth="0.2"
-							onClick={handleCopy}
+							onClick={copyColor}
 						/>
 						<text
 							x="48%"

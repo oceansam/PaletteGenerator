@@ -2,8 +2,8 @@ import { Button } from "@mui/material";
 import { animated, useTrail } from "react-spring";
 import Icon from "@mui/material/Icon";
 
-function OptionMenu({ showMenu, updateColorLock, isLocked }) {
-	const icons = ["lock", "remove", "add", "close"];
+function OptionMenu({ showMenu, updateColorLock, updateColorClose, isLocked }) {
+	const icons = ["lock", "close"];
 	const trail = useTrail(icons.length, {
 		config: { mass: 5, tension: 2000, friction: 200 },
 		opacity: showMenu ? 1 : 0,
@@ -16,7 +16,7 @@ function OptionMenu({ showMenu, updateColorLock, isLocked }) {
 		if (icons[index_icon] === "lock") {
 			updateColorLock();
 		} else if (icons[index_icon] === "close") {
-			console.log("close");
+			updateColorClose();
 		}
 	}
 	if (showMenu) {
@@ -33,15 +33,12 @@ function OptionMenu({ showMenu, updateColorLock, isLocked }) {
 			>
 				{trail.map(({ width, ...style }, index) => (
 					<animated.div key={index} style={style}>
-						<Button>
-							<Icon
-								className="icon"
-								sx={{ fontSize: 30 }}
-								style={{ width }}
-								onClick={() => {
-									handleClick(index);
-								}}
-							>
+						<Button
+							onClick={() => {
+								handleClick(index);
+							}}
+						>
+							<Icon className="icon" sx={{ fontSize: 30 }} style={{ width }}>
 								{icons[index] === "lock"
 									? isLocked
 										? "lock"

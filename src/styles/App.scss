@@ -1,12 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Pacifico&family=Saira:wght@200&display=swap");
 
 .color-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	// flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.m {
+	&-top {
+		margin-top: 30px;
+	}
+	&-bot {
+		margin-bottom: 30px;
+	}
+}
 html,
 body,
 #app,

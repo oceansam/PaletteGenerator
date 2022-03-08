@@ -2,11 +2,21 @@
 	&:hover {
 		cursor: pointer;
 	}
+	animation: display;
+	transition: 0.2 ease;
 }
 
 .icon {
 	color: #ff7a90;
 	&-white {
 		color: white;
+	}
+}
+@keyframes display {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
